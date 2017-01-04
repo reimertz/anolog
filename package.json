@@ -4,7 +4,7 @@
   "version": "0.0.1",
   "private": true,
   "devDependencies": {
-    "custom-react-scripts": "0.0.21"
+    "custom-react-scripts": "^0.0.21"
   },
   "license": "GNU GPL v3",
   "repository": {

@@ -1,5 +1,9 @@
 language: node_js
 
+branches:
+  only:
+  - master
+
 before_script:
  - yarn global add react-scripts
 script:
