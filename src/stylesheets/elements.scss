@@ -1,0 +1,135 @@
+body {
+  background-color: white;
+  margin: 0;
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+}
+
+header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 90vw;
+  max-width: $large-screen;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  z-index: 1;
+  background-color: rgba(white, 0.95);
+
+  @media (max-width: $small-screen) {
+    width: 100vw;
+  }
+
+  right {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .green {
+    color: $green;
+  }
+
+  .blue {
+    color: $blue;
+  }
+
+
+  main {}
+
+  *, ::before, ::after {
+    box-sizing: border-box;
+  }
+
+
+  #editor {
+    margin-top: 50px;
+  }
+
+  .dante-menu {
+    display: none;
+
+    &--active {
+      display: inline-block;
+    }
+  }
+
+  .explore {
+    .post {
+      margin-right: 5px;
+      background-color: transparent;
+      display: inline-block;
+      padding: 5px 30px;
+      color: white;
+      text-shadow: 0 0 20px black;
+      background-position: center;
+    }
+  }
+
+  a {
+    user-select: none;
+    color: black;
+    padding: 10px;
+    text-decoration: none;
+    display: block;
+    position: relative;
+    transition: 100ms;
+    font-weight: 700;
+    cursor: pointer;
+
+
+    &.bg {
+      color: black;
+      background-color: transparent;
+      border-bottom: 3px solid black;
+
+
+      &:hover {
+        color: white;
+      }
+
+      &:after {
+        position: absolute;
+        width: 100%;
+        height: 0;
+        content: '';
+        display: block;
+        background-color: black;
+        bottom: 0;
+        left: 0;
+        z-index: -1;
+        transition: 100ms;
+      }
+
+      // &.green:after {
+      //   background-color: $green;
+      // }
+
+      // &.blue:after {
+      //   background-color: $blue;
+      // }
+
+      &:hover:after {
+        height: 100%;
+      }
+
+      &:active {
+        transform: scale(0.95);
+      }
+    }
+
+    sup {
+      cursor: help;
+    }
+  }
+}
+
+article {
+  margin-top: 140px;
+}
