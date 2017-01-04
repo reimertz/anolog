@@ -114,7 +114,7 @@ export const uploadPost = (isExplorable = true) => async (dispatch, getState) =>
     let hash1 = json.files['anolog.encrypted.json'].raw_url.split('/')[4]
     let hash2 = json.files['anolog.encrypted.json'].raw_url.split('/')[6]
 
-    browserHistory.replace(`/p/${hash1}/${hash2}/${key}`)
+    browserHistory.replace(`/${hash1}/${hash2}/${key}`)
 
     return json
   }
