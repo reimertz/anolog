@@ -37,5 +37,8 @@
 3. I am currently exploring the best setup for this soon-to-be organization.
 
 ## Use anolog
-
 Go to [https://anolog.org](https://anolog.org).
+
+## Credits
+- [Dante2](https://github.com/reimertz/dante2) for the editor
+- [encrypted-gist](https://github.com/phiresky/encrypted-gist) for inspiration encryption/decryption of gists
