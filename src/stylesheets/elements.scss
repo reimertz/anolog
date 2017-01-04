@@ -6,13 +6,31 @@ body {
   justify-content: center;
 }
 
+*, ::before, ::after {
+  box-sizing: border-box;
+}
+
+.container {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+  width: 90vw;
+  max-width: $large-screen;
+
+  main {
+    flex: 1;
+  }
+
+  @media (max-width: $small-screen) {
+    width: 100vw;
+  }
+}
+
 header {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  width: 90vw;
-  max-width: $large-screen;
   position: fixed;
   top: 0;
   left: 0;
@@ -20,10 +38,10 @@ header {
   margin: 0 auto;
   z-index: 1;
   background-color: rgba(white, 0.95);
+  backdrop-filter: blur(10px);
 
-  @media (max-width: $small-screen) {
-    width: 100vw;
-  }
+  width: 90vw;
+  max-width: $large-screen;
 
   right {
     display: flex;
@@ -31,26 +49,17 @@ header {
     justify-content: space-between;
     align-items: center;
   }
+}
 
-  .green {
-    color: $green;
-  }
+footer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  min-height: 50px;
+}
 
-  .blue {
-    color: $blue;
-  }
-
-
-  main {}
-
-  *, ::before, ::after {
-    box-sizing: border-box;
-  }
-
-
-  #editor {
-    margin-top: 50px;
-  }
+#editor {
+  margin-top: 50px;
 
   .dante-menu {
     display: none;
@@ -59,17 +68,19 @@ header {
       display: inline-block;
     }
   }
+}
 
-  .explore {
-    .post {
-      margin-right: 5px;
-      background-color: transparent;
-      display: inline-block;
-      padding: 5px 30px;
-      color: white;
-      text-shadow: 0 0 20px black;
-      background-position: center;
-    }
+article {
+  margin-top: 140px;
+}
+
+header, footer {
+  .green {
+    color: $green;
+  }
+
+  .blue {
+    color: $blue;
   }
 
   a {
@@ -128,8 +139,4 @@ header {
       cursor: help;
     }
   }
-}
-
-article {
-  margin-top: 140px;
 }
