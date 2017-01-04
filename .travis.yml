@@ -1,6 +1,8 @@
 language: node_js
 node_js:
   - '6'
+before_script:
+ - yarn global add react-scripts
 script:
   - bash ./deploy.sh
 sudo: false
