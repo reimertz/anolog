@@ -2,6 +2,7 @@ language: node_js
 node_js:
   - '6.2.0'
 before_script:
+ - yarn cache clean
  - yarn global add react-scripts
 script:
   - bash ./deploy.sh
