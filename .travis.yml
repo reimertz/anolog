@@ -1,12 +1,8 @@
 language: node_js
 node_js:
-  - '6.7.1'
+  - '6.8.0'
 before_script:
  - yarn global add react-scripts
 script:
   - bash ./deploy.sh
 sudo: false
-cache:
-  yarn: true
-  directories:
-    - node_modules
