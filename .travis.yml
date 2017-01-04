@@ -1,11 +1,8 @@
 language: node_js
-node_js:
-  - '6.2.0'
+node_js: '5'
 before_script:
- - yarn cache clean
  - yarn global add react-scripts
 script:
   - bash ./deploy.sh
 sudo: false
-cache:
-  yarn: false
+cache: yarn
