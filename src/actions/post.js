@@ -67,7 +67,6 @@ export const fetchPost = (hashId1, hashId2, key) => async dispatch => {
     return parsedPost
   }
   catch (e) {
-    console.log(e)
     browserHistory.replace('/not-found')
     dispatch(noPostFound())
   }
@@ -78,15 +77,9 @@ export const uploadPost = (isExplorable = true) => async (dispatch, getState) =>
   const danteEditor = editor.editor.editor
 
   const content = danteEditor.emitSerializedOutput()
-
-  // const firstImage = content.blocks.find(o => { return o.type === 'image'})
-  // const imageUrl = firstImage ? firstImage.data.url : false
-  // const title = content.blocks[0].text
-  // const words = danteEditor.getTextFromEditor().split(" ").length
-
   const binaryContent = new TextEncoder().encode(JSON.stringify(content))
-
   const { encryptedData, key }  = await encrypt(binaryContent)
+
   const options = {
     method: 'POST',
     headers: {
@@ -119,7 +112,8 @@ export const uploadPost = (isExplorable = true) => async (dispatch, getState) =>
     return json
   }
   catch(e) {
-
+    browserHistory.replace('/not-found')
+    dispatch(noPostFound())
   }
 
 }

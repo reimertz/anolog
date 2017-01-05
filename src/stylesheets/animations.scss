@@ -1,0 +1,28 @@
+@keyframes slideDown {
+  from {
+    top: -100px;
+    opacity: 0;
+  }
+  to {
+    top: 0;
+    opacity: 1;
+  }
+}
+
+@keyframes zoomIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+header {
+  animation: slideDown 500ms 1;
+}
+
+main {
+  opacity: 0;
+  animation: zoomIn 500ms 1 forwards;
+}
