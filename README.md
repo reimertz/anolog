@@ -19,6 +19,8 @@
 </p>
 
 ## Features
+
+[![Join the chat at https://gitter.im/reimertz/anolog](https://badges.gitter.im/reimertz/anolog.svg)](https://gitter.im/reimertz/anolog?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 **Anolog** requires no registration or authentication.
 
 **Anolog** posts are immutable. if you want to do an edit, fork it.
