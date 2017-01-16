@@ -15,8 +15,8 @@ export default
     <Route path="/thinking-face" component={ThinkingFace} />
     <Route path="/create" component={CreatePost} />
 
-    <Route path=":hash1/:hash2/:key" component={Post} />
-    <Route path=":hash1/:hash2/:key/fork" component={Fork} />
+    <Route path=":hashId/:key" component={Post} />
+    <Route path=":hashId/:key/fork" component={Fork} />
 
     <Route path="*" component={NotFound}/>
   </Route>

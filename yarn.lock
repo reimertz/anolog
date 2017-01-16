@@ -2,11 +2,13 @@
 # yarn lockfile v1
 
 
-"Dante2@https://github.com/reimertz/dante2.git":
-  version "0.2.0"
-  resolved "https://github.com/reimertz/dante2.git#d0eb7038f1111790d1205b8290183c0bfc77415e"
+"Dante2@https://github.com/michelson/dante2.git#distribution":
+  version "0.3.0"
+  resolved "https://github.com/michelson/dante2.git#438e7c2f8795ce24d49477f7692a4d32919c4c7f"
   dependencies:
     axios "^0.15.2"
+    babel-runtime "^6.11.6"
+    cross-env "^3.1.4"
     draft-convert "^1.2.3"
     draft-js "0.9.1"
     react "~15.3.0"
@@ -1568,6 +1570,12 @@ cosmiconfig@^2.1.0, cosmiconfig@^2.1.1:
     parse-json "^2.2.0"
     require-from-string "^1.1.0"
 
+cross-env@^3.1.4:
+  version "3.1.4"
+  resolved "https://registry.yarnpkg.com/cross-env/-/cross-env-3.1.4.tgz#56e8bca96f17908a6eb1bc2012ca126f92842130"
+  dependencies:
+    cross-spawn "^3.0.1"
+
 cross-spawn@4.0.2:
   version "4.0.2"
   resolved "https://registry.yarnpkg.com/cross-spawn/-/cross-spawn-4.0.2.tgz#7b9247621c23adfdd3856004a823cbe397424d41"
@@ -1575,7 +1583,7 @@ cross-spawn@4.0.2:
     lru-cache "^4.0.1"
     which "^1.2.9"
 
-cross-spawn@^3.0.0:
+cross-spawn@^3.0.0, cross-spawn@^3.0.1:
   version "3.0.1"
   resolved "https://registry.yarnpkg.com/cross-spawn/-/cross-spawn-3.0.1.tgz#1256037ecb9f0c5f79e3d6ef135e30770184b982"
   dependencies:

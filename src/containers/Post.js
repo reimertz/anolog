@@ -7,13 +7,12 @@ import Editor from '../components/Editor'
 class Post extends Component {
   async componentWillMount() {
     const { dispatch } = this.props
-    const { hash1, hash2, key } = this.props.routeParams
+    const { hashId, key } = this.props.routeParams
 
-    dispatch(fetchPost(hash1, hash2, key))
+    dispatch(fetchPost(hashId, key))
   }
 
   componentWillReceiveProps(nextProps) {
-
 
   }
 

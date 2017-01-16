@@ -10,11 +10,22 @@ class Header extends Component {
 
     dispatch(uploadPost())
   }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    const { location } = this.props.router
+    const   nextLocation = nextProps.router.location
+
+    return location.pathname === nextLocation.pathname
+  }
+
   render() {
-    const currentPath = this.props.routing.locationBeforeTransitions.pathname
-    const isFork = currentPath.indexOf('/fork') >= 0
-    const isCreating = currentPath.indexOf('create') >= 0 || isFork
-    const isPost = (currentPath.split('/').length -1) === 3
+    const { params, location } = this.props.router
+    const { pathname } = location
+    const { hashId, key } = params
+
+    const isFork = pathname.indexOf('/fork') >= 0
+    const isCreating = pathname.indexOf('create') >= 0 || isFork
+    const isPost = (hashId && key) || isFork
 
     return (
       <header>
@@ -27,7 +38,7 @@ class Header extends Component {
             ? <Link onClick={this.onPublish.bind(this)} className="bg">Publish</Link>
             : <div style={{display: 'flex',flexDirection: 'row'}}>
                 { isPost && !isFork
-                  ? <Link to={`${currentPath}/fork`} className="bg">Fork</Link>
+                  ? <Link to={`${pathname}/fork`} className="bg">Fork</Link>
                   : false
                 }
                 <Link to={'/create'} className="bg">Write a story</Link>

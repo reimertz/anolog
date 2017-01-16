@@ -31,6 +31,7 @@ const post = (state = {
     case DONE_UPLOADING_POST:
       return {
         ...state,
+        post: action.post,
         isPosting: false,
         publishedAt: action.publishedAt,
       }

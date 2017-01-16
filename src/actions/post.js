@@ -7,9 +7,9 @@ export const ERROR_FETCHING_POST = 'ERROR_FETCHING_POST'
 export const UPLOADING_POST = 'UPLOADING_POST'
 export const DONE_UPLOADING_POST = 'DONE_UPLOADING_POST'
 
-import { browserHistory } from 'react-router'
+import { hashHistory } from 'react-router'
 
-import { encrypt, decrypt } from '../utils/Crypto'
+import { encrypt, decrypt, getRandomString } from '../utils/Crypto'
 
 import { b64_encode, b64_decode } from '../utils/Base64'
 
@@ -44,21 +44,33 @@ const uploadingPost = post => ({
 const postUploaded = (post, json) => ({
   type: DONE_UPLOADING_POST,
   post,
-  url: json.files['anolog.encrypted.json'].raw_url,
+  url: json.url,
   publishedAt: Date.now()
 })
 
-export const fetchPost = (hashId1, hashId2, key) => async dispatch => {
-  const url = `https://gist.githubusercontent.com/anonymous/${hashId1}/raw/${hashId2}/anolog.encrypted.json`
+export const fetchPost = (hashId, key) => async dispatch => {
+  const url = `https://api.github.com/gists/${hashId}`
 
   dispatch(fetchingPost())
 
   try {
     const response  = await fetch(url)
                       await checkStatus(response)
-    const text      = await response.text()
-    const decoded   = b64_decode(text, true)
+    const json      = await response.json()
+    const encryptedFile = json.files[Object.keys(json.files)[0]]
+    let text
 
+
+    if (json.truncated) {
+      const rawResponse  = await fetch(encryptedFile.raw_url)
+                           await checkStatus(rawResponse)
+      text = await rawResponse.text()
+    }
+    else {
+      text = await encryptedFile.content
+    }
+
+    const decoded   = b64_decode(text, true)
     const decryptedPost = await decrypt(new Uint8Array(decoded), key)
     const parsedPost = JSON.parse(new TextDecoder('utf-8').decode(decryptedPost))
 
@@ -67,7 +79,8 @@ export const fetchPost = (hashId1, hashId2, key) => async dispatch => {
     return parsedPost
   }
   catch (e) {
-    browserHistory.replace('/not-found')
+    console.log(e)
+    hashHistory.replace('not-found')
     dispatch(noPostFound())
   }
 }
@@ -79,6 +92,12 @@ export const uploadPost = (isExplorable = true) => async (dispatch, getState) =>
   const content = danteEditor.emitSerializedOutput()
   const binaryContent = new TextEncoder().encode(JSON.stringify(content))
   const { encryptedData, key }  = await encrypt(binaryContent)
+  const randomString  = await getRandomString()
+  let files = {}
+
+  files[randomString] = {
+    'content':  b64_encode(encryptedData, true, false)
+  }
 
   const options = {
     method: 'POST',
@@ -87,11 +106,7 @@ export const uploadPost = (isExplorable = true) => async (dispatch, getState) =>
     },
     body: JSON.stringify({
       public: false,
-      files: {
-        'anolog.encrypted.json': {
-          'content':  b64_encode(encryptedData, true, false)
-        }
-      }
+      files,
     })
   }
 
@@ -104,15 +119,15 @@ export const uploadPost = (isExplorable = true) => async (dispatch, getState) =>
 
     dispatch(dispatch(postUploaded(content, json)))
 
-    let hash1 = json.files['anolog.encrypted.json'].raw_url.split('/')[4]
-    let hash2 = json.files['anolog.encrypted.json'].raw_url.split('/')[6]
+    let hash = json.files[randomString].raw_url.split('/')[4]
 
-    browserHistory.replace(`/${hash1}/${hash2}/${key}`)
+    hashHistory.replace(`${hash}/${key}`)
 
     return json
   }
   catch(e) {
-    browserHistory.replace('/not-found')
+    console.log(e);
+    hashHistory.replace('not-found')
     dispatch(noPostFound())
   }
 

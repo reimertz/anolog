@@ -27,8 +27,6 @@ export const encrypt = async (data) => {
 
   const encryptedData = joinIvAndData(iv, new Uint8Array(encrypted))
 
-  debugger
-
   return {
     encryptedData,
     key: rawKey
@@ -45,4 +43,12 @@ export const decrypt = async (data, key) => {
   const decryptedData = await crypto.subtle.decrypt({ name: ALGO_NAME, iv }, importedKey, encryptedData)
 
   return decryptedData
+}
+
+
+export const getRandomString = (length = 10) => {
+  const letters = 'ABCDEFGHIJLKMNOPQRSTUVWXYZabcdefghijlkmnopqrstuvwxyz123456789'.split('')
+  const randomNumbers =  Array.from(crypto.getRandomValues(new Uint8Array(length)))
+  const randomString = randomNumbers.map(s => { return letters[parseInt(s, 10) % letters.length] }).join('')
+  return randomString
 }

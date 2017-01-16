@@ -4,16 +4,14 @@ import Footer from '../components/Footer'
 
 class App extends Component {
   render() {
-
     const { children } = this.props
-
     return (
       <div className="container">
-        <Header />
+        <Header  {...this.props} />
         <main>
           { children }
         </main>
-        <Footer />
+        <Footer {...this.props} />
       </div>
     )
   }
